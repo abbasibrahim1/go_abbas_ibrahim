@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	res1 := merge([][]int{
+		{1, 2, 5, 4, 3},
+		{1, 2, 7, 8},
+	})
+	fmt.Println(res1) // [1,2,5,4,3,7,8]
+
+	res2 := merge([][]int{
+		{1, 2, 5, 4, 5},
+		{7, 9, 10, 5},
+	})
+	fmt.Println(res2) // [1, 2, 5, 4, 7, 9, 10]
+
+	res3 := merge([][]int{
+		{1, 4, 5},
+		{7},
+	})
+	fmt.Println(res3) // [1, 4, 5, 7]
+}
+
+func merge(data [][]int) []int {
+	// Create a map to track unique elements
+	uniqueElements := make(map[int]bool)
+
+	// Iterate through the 2D array and add elements to the map
+	for _, row := range data {
+		for _, val := range row {
+			uniqueElements[val] = true
+		}
+	}
+
+	// Convert the map keys to a 1D slice
+	result := make([]int, 0, len(uniqueElements))
+	for key := range uniqueElements {
+		result = append(result, key)
+	}
+
+	return result
+}

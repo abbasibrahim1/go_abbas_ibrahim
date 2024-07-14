@@ -1,0 +1,58 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	data1 := []float64{1, 1, 2, 5, 6, 8, 12, 4, 5, 5, 5, 8, 9}
+	fmt.Printf("sum: %.2f\n", sum(data1))
+	fmt.Printf("mean: %.2f\n", mean(data1))
+	fmt.Printf("median: %.2f\n", median(data1))
+	fmt.Printf("mode: %.2f\n", mode(data1))
+
+	data2 := []float64{6, 7, 1, 11, 8, 12, 6, 12, 1, 7, 8, 10, 14}
+	fmt.Printf("sum: %.2f\n", sum(data2))
+	fmt.Printf("mean: %.2f\n", mean(data2))
+	fmt.Printf("median: %.2f\n", median(data2))
+	fmt.Printf("mode: %.2f\n", mode(data2))
+}
+
+func sum(data []float64) float64 {
+	total := 0.0
+	for _, val := range data {
+		total += val
+	}
+	return total
+}
+
+func mean(data []float64) float64 {
+	return sum(data) / float64(len(data))
+}
+
+func median(data []float64) float64 {
+	sort.Float64s(data)
+	n := len(data)
+	if n%2 == 1 {
+		return data[n/2]
+	}
+	return (data[n/2-1] + data[n/2]) / 2
+}
+
+func mode(data []float64) float64 {
+	counts := make(map[float64]int)
+	for _, val := range data {
+		counts[val]++
+	}
+
+	var modeVal float64
+	maxCount := 0
+	for val, count := range counts {
+		if count > maxCount {
+			modeVal = val
+			maxCount = count
+		}
+	}
+	return modeVal
+}

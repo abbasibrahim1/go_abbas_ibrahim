@@ -1,0 +1,37 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+ // FindPrimesEratosthenes finds prime numbers up to n using the Sieve of Eratosthenes.
+func FindPrimesEratosthenes(n int) []bool {
+	A := make([]bool, n)
+	for i := 2; i*i <= n; i++ {
+		if A[i] {
+			continue
+		}
+		for j := i * i; j < n; j += i {
+			A[j] = true
+		}
+	}
+	return A
+}
+
+// IsPrime checks if a given number is prime.
+func IsPrime(number int) bool {
+	if number < 2 {
+		return false
+	}
+	primes := FindPrimesEratosthenes(int(math.Sqrt(float64(number))) + 1)
+	return !primes[number]
+}
+
+func main() {
+	fmt.Println(IsPrime(1000000007)) // true
+	fmt.Println(IsPrime(13))         // true
+	fmt.Println(IsPrime(17))         // true
+	fmt.Println(IsPrime(20))         // false
+	fmt.Println(IsPrime(35))         // false
+}

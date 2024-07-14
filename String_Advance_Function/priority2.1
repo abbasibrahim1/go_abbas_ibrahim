@@ -1,0 +1,34 @@
+class Customer:
+    def __init__(self, name, address):
+        self.name = name
+        self.address = address
+        self.rented_vehicles = []  # List to store rented vehicles
+
+    def rent_vehicle(self, vehicle):
+        self.rented_vehicles.append(vehicle)
+        print(f"{self.name} rented {vehicle.name}")
+
+    def return_vehicle(self, vehicle):
+        if vehicle in self.rented_vehicles:
+            self.rented_vehicles.remove(vehicle)
+            print(f"{self.name} returned {vehicle.name}")
+        else:
+            print(f"{self.name} did not rent {vehicle.name}")
+
+class Vehicle:
+    def __init__(self, name, brand, vehicle_type, rent_price):
+        self.name = name
+        self.brand = brand
+        self.vehicle_type = vehicle_type
+        self.rent_price = rent_price
+
+# Example usage:
+if __name__ == "__main__":
+    # Create some vehicles
+    vehicle1 = Vehicle("Car A", "Toyota", "Sedan", 50)
+    vehicle2 = Vehicle("Car B", "Honda", "SUV", 70)
+
+    # Create a customer
+    customer1 = Customer("John Doe", "123 Main St")
+
+    }
